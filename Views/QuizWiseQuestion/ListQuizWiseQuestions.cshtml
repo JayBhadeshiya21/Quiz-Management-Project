@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<main id="main" class="main">
+
+<div class="container mt-4">
+    <h4 class="mb-3">Quiz Wise Questions</h4>
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Tables</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Quiz Wise Questions</li>
+        </ol>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="card p-4 mb-4">
+        <h5>Search</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label">Select Quiz</label>
+                <select class="form-select">
+                    <option selected disabled>Select Quiz</option>
+                    <option>English Grammar Test</option>
+                    <option>General Knowledge Quiz</option>
+                    <option>Geography Challenge</option>
+                    <option>History Test</option>
+                    <option>Programming Quiz</option>
+                </select>
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="btn btn-success">Search</button>
+            <button class="btn btn-danger">Reset</button>
+        </div>
+    </div>
+
+    <!-- Quiz List Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Quiz Wise Questions</h5>
+            <a asp-controller="QuizWiseQuestion" asp-action="AddQuizWiseQuestions" class="btn btn-primary">Add Quiz Wise Question</a>
+    </div>
+
+    <!-- Quiz Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Quiz Name</th>
+                    <th>Entered Questions</th>
+                    <th>User Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>English Grammar Test</td>
+                    <td>10</td>
+                    <td>JohnDoe</td>
+                    <td>
+                        <button class="btn btn-sm btn-info">ℹ Details</button>
+                        <button class="btn btn-sm btn-success">✏ Edit</button>
+                        <button class="btn btn-sm btn-danger">❌ Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>General Knowledge Quiz</td>
+                    <td>2</td>
+                    <td>JohnDoe</td>
+                    <td>
+                        <button class="btn btn-sm btn-info">ℹ Details</button>
+                        <button class="btn btn-sm btn-success">✏ Edit</button>
+                        <button class="btn btn-sm btn-danger">❌ Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Geography Challenge</td>
+                    <td>46</td>
+                    <td>JohnDoe</td>
+                    <td>
+                            <button class="btn btn-sm btn-info"><a asp-controller="Question" asp-action="QuizWiseQuestionsDetails"><span class="text-black">ℹ Details</span></a></button>
+                        <button class="btn btn-sm btn-success">✏ Edit</button>
+                        <button class="btn btn-sm btn-danger">❌ Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>History Test</td>
+                    <td>3</td>
+                    <td>JohnDoe</td>
+                    <td>
+                        <button class="btn btn-sm btn-info">ℹ Details</button>
+                        <button class="btn btn-sm btn-success">✏ Edit</button>
+                        <button class="btn btn-sm btn-danger">❌ Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Programming Quiz</td>
+                    <td>30</td>
+                    <td>JohnDoe</td>
+                    <td>
+                        <button class="btn btn-sm btn-info">ℹ Details</button>
+                        <button class="btn btn-sm btn-success">✏ Edit</button>
+                        <button class="btn btn-sm btn-danger">❌ Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between mt-3">
+        <span>Showing 1 to 5 of 5 entries</span>
+        <nav>
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+</main>

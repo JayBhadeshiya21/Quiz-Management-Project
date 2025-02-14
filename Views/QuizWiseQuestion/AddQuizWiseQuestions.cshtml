@@ -1,0 +1,115 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<main id="main" class="main">
+
+<div class="container mt-4">
+    <h4 class="mb-3">Add Quiz Wise Question</h4>
+
+    <!-- Quiz Selection & Info -->
+    <div class="card p-4 mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Total Questions Allowed</label>
+                <input type="number" class="form-control" value="10" readonly>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Selected Questions Count</label>
+                <input type="number" class="form-control" value="0" readonly>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Select Quiz</label>
+                <select class="form-select">
+                    <option selected>English Grammar Test</option>
+                    <option>General Knowledge Quiz</option>
+                    <option>Geography Challenge</option>
+                    <option>History Test</option>
+                    <option>Programming Quiz</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Questions Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Select</th>
+                    <th>Question</th>
+                    <th>Option A</th>
+                    <th>Option B</th>
+                    <th>Option C</th>
+                    <th>Option D</th>
+                    <th>Answer</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Who was the first President of the USA?</td>
+                    <td>George Washington</td>
+                    <td>Abraham Lincoln</td>
+                    <td>John Adams</td>
+                    <td>Thomas Jefferson</td>
+                    <td>A</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>What is the capital of France?</td>
+                    <td>Berlin</td>
+                    <td>Madrid</td>
+                    <td>Paris</td>
+                    <td>Lisbon</td>
+                    <td>C</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Which planet is known as the Red Planet?</td>
+                    <td>Earth</td>
+                    <td>Mars</td>
+                    <td>Jupiter</td>
+                    <td>Venus</td>
+                    <td>B</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Which continent has the largest population?</td>
+                    <td>Africa</td>
+                    <td>Asia</td>
+                    <td>Europe</td>
+                    <td>South America</td>
+                    <td>B</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>Who discovered gravity?</td>
+                    <td>Newton</td>
+                    <td>Einstein</td>
+                    <td>Galileo</td>
+                    <td>Kepler</td>
+                    <td>A</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Save & Cancel Buttons -->
+    <div class="d-flex gap-2 mt-3">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="reset" class="btn btn-danger">Cancel</button>
+    </div>
+
+</div>
+
+</main>

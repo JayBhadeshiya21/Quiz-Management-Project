@@ -1,0 +1,94 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model UpdateQuizModel;
+<main id="main" class="main container-fluid">
+
+    <div class="pagetitle">
+        <h1>Update Quiz</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Quiz</a></li>
+                <li class="breadcrumb-item">Update_Quiz</li>
+                @* <li class="breadcrumb-item active">Elements</li> *@
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-9">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">General QuizForm Elements</h5>
+
+                        <!-- General Form Elements -->
+                        <form>
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">QuizId</label><br />
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for="QuizId" placeholder="Enter QuizID In Which Do You Want To Update">
+                                    <span asp-validation-for="QuizId"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">NewQuizName</label><br />
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="NewQuizName" placeholder="NewQuizName">
+                                    <span asp-validation-for="NewQuizName"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail" class="col-sm-2 col-form-label">Total Question</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for"TotalQuestion" placeholder="Enter New total Question">
+                                    <span asp-validation-for="TotalQuestion"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">QuizDate</label>
+                                <div class="col-sm-10">
+                                    <input type="datetime-local" class="form-control" asp-for="QuizDate" placeholder="Enter New QuizDate">
+                                    <span asp-validation-for="QuizDate"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputNumber" class="col-sm-2 col-form-label">UserId</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for="UserId" placeholder="Enter new UserID">
+                                    <span asp-validation-for="UserId"></span>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputPassword" class="col-sm-2 col-form-label">ModifiedDate</label>
+                                <div class="col-sm-10">
+                                    <input type="datetime-local" class="form-control" asp-for="ModifiedDate" placeholder="Optional For Now">
+                                    <span asp-validation-for="ModifiedDate"></span>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Update Quiz</button>
+                                </div>
+                      
+
+                        </form><!-- End General Form Elements -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
