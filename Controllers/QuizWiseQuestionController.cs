@@ -14,5 +14,9 @@ namespace Quiz1.Controllers
         {
             return View();
         }
+        public IActionResult QuizWiseQuestionsDetails()
+        {
+            return View();
+        }
     }
 }
