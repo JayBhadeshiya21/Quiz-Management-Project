@@ -1,8 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model DataTable
+@using System.Data
 
 
 <main id="main" class="main">
@@ -59,71 +56,60 @@
     </div>
 
     <!-- Question Table -->
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead class="table-light">
-                <tr>
-                    <th>Question Text</th>
-                    <th>Question Level</th>
-                    <th>Option A</th>
-                    <th>Option B</th>
-                    <th>Option C</th>
-                    <th>Option D</th>
-                    <th>Answer</th>
-                    <th>Marks</th>
-                    <th>Active</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Who was the first President of the USA?</td>
-                    <td>Easy</td>
-                    <td>George Washington</td>
-                    <td>Abraham Lincoln</td>
-                    <td>John Adams</td>
-                    <td>Thomas Jefferson</td>
-                    <td>A</td>
-                    <td>2</td>
-                    <td>Yes</td>
-                    <td>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>What is the capital of France?</td>
-                    <td>Easy</td>
-                    <td>Berlin</td>
-                    <td>Madrid</td>
-                    <td>Paris</td>
-                    <td>Lisbon</td>
-                    <td>C</td>
-                    <td>1</td>
-                    <td>Yes</td>
-                    <td>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Which planet is known as the Red Planet?</td>
-                    <td>Easy</td>
-                    <td>Earth</td>
-                    <td>Mars</td>
-                    <td>Jupiter</td>
-                    <td>Venus</td>
-                    <td>B</td>
-                    <td>2</td>
-                    <td>Yes</td>
-                    <td>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Question Text</th>
+                        <th>QuestionLevelID</th>
+                        <th>User Name</th>
+                        <th>Option A</th>
+                        <th>Option B</th>
+                        <th>Option C</th>
+                        <th>Option D</th>
+                        <th>Answer</th>
+                        <th>Marks</th>
+                        <th>Active</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Rows.Count > 0)
+                    {
+                        @foreach (DataRow datarow in Model.Rows)
+                        {
+                            <tr>
+                                <td>@datarow["QuestionText"]</td>
+                                <td>@datarow["QuestionLevelID"]</td>
+                                <td>@datarow["UserName"]</td>
+                                <td>@datarow["OptionA"]</td>
+                                <td>@datarow["OptionB"]</td>
+                                <td>@datarow["OptionC"]</td>
+                                <td>@datarow["OptionD"]</td>
+                                <td>@datarow["CorrectOption"]</td>
+                                <td>@datarow["QuestionMarks"]</td>
+                                <td>@datarow["IsActive"]</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-success">✏ Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="alertbox()">
+                                        <a href="/Question/QuestionDelete?QuestionID=@datarow["QuestionID"]">
+                                            ❌ Delete
+                                        </a>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="10" class="text-center">No questions found.</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-between mt-3">
@@ -143,3 +129,9 @@
 
 </div>
 </main>
+
+<script>
+    function alertbox() {
+      alert("Are you sure for delete data");
+    }
+</script>

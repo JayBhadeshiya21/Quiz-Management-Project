@@ -1,6 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DataTable
+@using System.Data
 
 <main id="main" class="main">
 
@@ -60,51 +59,32 @@
                 <thead class="table-light">
                     <tr>
                         <th>QUIZ NAME</th>
-                        <th>TOTAL QUESTIONS</th>
+                        <th>USER NAME</th>
                         <th>QUIZ DATE</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>English Grammar Test</td>
-                        <td>10</td>
-                        <td>10-08-2024</td>
-                        <td>
-                            <button class="btn btn-sm btn-success">✏ Edit</button>
-                            <button class="btn btn-sm btn-danger">❌ Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>General Knowledge Quiz</td>
-                        <td>10</td>
-                        <td>10-01-2024</td>
-                        <td>
-                            <button class="btn btn-sm btn-success">✏ Edit</button>
-                            <button class="btn btn-sm btn-danger">❌ Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Geography Challenge</td>
-                        <td>18</td>
-                        <td>22-06-2024</td>
-                        <td>
-                            <button class="btn btn-sm btn-success">✏ Edit</button>
-                            <button class="btn btn-sm btn-danger">❌ Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Math Challenge</td>
-                        <td>20</td>
-                        <td>20-03-2024</td>
-                        <td>
-                            <button class="btn btn-sm btn-success">✏ Edit</button>
-                            <button class="btn btn-sm btn-danger">❌ Delete</button>
-                        </td>
-                    </tr>
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["QuizName"]</td>
+                            <td>@datarow["UserName"]</td>
+                            <td>@datarow["QuizDate"]</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-success">✏ Edit</button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="alertbox()">
+                                    <a href="/Quiz/QuizDelete?QuizID=@datarow["QuizID"]">
+                                        ❌ Delete
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
+
 
         <!-- Pagination -->
         <div class="d-flex justify-content-between mt-3">
@@ -121,3 +101,9 @@
 
     </div>
 </main><!-- End #main -->
+
+<script>
+    function alertbox() {
+      alert("Are you sure for delete data");
+    }
+</script>
