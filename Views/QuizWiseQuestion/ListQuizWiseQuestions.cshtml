@@ -1,8 +1,5 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model DataTable
+@using System.Data
 
 
 <main id="main" class="main">
@@ -48,70 +45,52 @@
     </div>
 
     <!-- Quiz Table -->
-    <div class="table-responsive">
-        <table class="table table-bordered align-middle">
-            <thead class="table-light">
-                <tr>
-                    <th>Quiz Name</th>
-                    <th>Entered Questions</th>
-                    <th>User Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>English Grammar Test</td>
-                    <td>10</td>
-                    <td>JohnDoe</td>
-                    <td>
-                        <button class="btn btn-sm btn-info">ℹ Details</button>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>General Knowledge Quiz</td>
-                    <td>2</td>
-                    <td>JohnDoe</td>
-                    <td>
-                        <button class="btn btn-sm btn-info">ℹ Details</button>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Geography Challenge</td>
-                    <td>46</td>
-                    <td>JohnDoe</td>
-                    <td>
-                        <button class="btn btn-sm btn-info"><a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionsDetails"><span class="text-black">ℹ Details</span></a></button>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>History Test</td>
-                    <td>3</td>
-                    <td>JohnDoe</td>
-                    <td>
-                        <button class="btn btn-sm btn-info">ℹ Details</button>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Programming Quiz</td>
-                    <td>30</td>
-                    <td>JohnDoe</td>
-                    <td>
-                        <button class="btn btn-sm btn-info">ℹ Details</button>
-                        <button class="btn btn-sm btn-success">✏ Edit</button>
-                        <button class="btn btn-sm btn-danger">❌ Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Quiz Name</th>
+                        <th>Entered Questions</th>
+                        <th>User Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model == null || Model.Rows.Count == 0)
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-danger">No data available.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (DataRow datarow in Model.Rows)
+                        {
+                            <tr>
+                                <td>@datarow["QuizName"]</td>
+                                <td>@datarow["QuestionText"]</td>
+                                <td>@datarow["UserName"]</td>
+
+                                <td>
+                                    <a asp-controller="QuizWiseQuestions" asp-action="ListQuizWiseQuestions" class="btn btn-sm btn-outline-info">
+                                        ℹ Details
+                                    </a>
+                                    <button class="btn btn-sm btn-outline-success">✏ Edit</button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="alertbox()">
+                                        <a href="/QuizWiseQuestions/QuestionLevelsDelete?QuizWiseQuestionsID=@datarow["QuizWiseQuestionsID"]">
+                                            ❌ Delete
+                                        </a>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-between mt-3">
@@ -128,3 +107,8 @@
 
 </div>
 </main>
+<script>
+    function alertbox() {
+      alert("Are you sure for delete data");
+    }
+</script>
