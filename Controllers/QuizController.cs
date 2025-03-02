@@ -1,12 +1,12 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc;
+using Quiz1.Models;
 
 namespace Quiz1.Controllers
 {
     public class QuizController : Controller
     {
-
         private IConfiguration configuration;
 
         public QuizController(IConfiguration _configuration)
@@ -14,9 +14,28 @@ namespace Quiz1.Controllers
             configuration = _configuration;
         }
 
-        public IActionResult Add_Quiz()
+        public IActionResult Add_Quiz(AddQuizModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                string connectionString = this.configuration.GetConnectionString("ConnectionString");
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+
+
+                command.CommandText = "PR_Quiz_Insert";
+                command.Parameters.Add("@QuizName", SqlDbType.VarChar).Value = model.QuizName;
+                command.Parameters.Add("@QuizDate", SqlDbType.DateTime).Value = model.QuizDate;
+                command.Parameters.Add("@UserId", SqlDbType.Int).Value = model.UserId;
+                command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
+                command.Parameters.Add("@TotalQuestions", SqlDbType.Int).Value = model.TotalQuestions;
+                command.ExecuteNonQuery();
+                return RedirectToAction("Quiz_List");
+            }
+
+            return View("Add_Quiz", model);
         }
 
         public IActionResult Quiz_List()

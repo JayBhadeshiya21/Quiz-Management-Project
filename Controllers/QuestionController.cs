@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using Quiz1.Models;
 
 namespace Quiz1.Controllers
 {
@@ -14,7 +15,10 @@ namespace Quiz1.Controllers
             configuration = _configuration;
         }
 
-
+        public IActionResult AddQuestion()
+        {
+            return View();
+        }
         public IActionResult QuestionList()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -55,10 +59,36 @@ namespace Quiz1.Controllers
                 return RedirectToAction("QuestionList");
             }
         }
-        public IActionResult AddQuestion()
+
+        public IActionResult QuestionInsert(AddQuestionModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                string connectionString = this.configuration.GetConnectionString("ConnectionString");
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.CommandText = "PR_Question_Insert";
+                command.Parameters.Add("@QuestionText", SqlDbType.VarChar).Value = model.QuestionText;
+                command.Parameters.Add("@QuestionLevelID", SqlDbType.Int).Value = model.QuestionLevelID;
+                command.Parameters.Add("@OptionA", SqlDbType.VarChar).Value = model.OptionA;
+                command.Parameters.Add("@OptionB", SqlDbType.VarChar).Value = model.OptionB;
+                command.Parameters.Add("@OptionC", SqlDbType.VarChar).Value = model.OptionC;
+                command.Parameters.Add("@OptionD", SqlDbType.VarChar).Value = model.OptionD;
+                command.Parameters.Add("@CorrectOption", SqlDbType.VarChar).Value = model.CorrectOption;
+                command.Parameters.Add("@QuestionMarks", SqlDbType.Int).Value = model.QuestionMarks;
+                command.Parameters.Add("@IsActive", SqlDbType.Bit).Value = model.IsActive;
+                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
+                command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
+                command.ExecuteNonQuery();
+                return RedirectToAction("QuestionList");
+            }
+
+            return View("AddQuestion", model);
         }
-      
+
+
     }
 }

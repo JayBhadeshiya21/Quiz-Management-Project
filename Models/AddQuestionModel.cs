@@ -26,8 +26,17 @@ namespace Quiz1.Models
         public string CorrectOption { get; set; }
 
         [Required]
-        public string QuestionMarks { get; set; }
+        public int QuestionMarks { get; set; }
 
-      
+        [Range(0,1)]
+        public int IsActive { get; set; }
+
+        [Required]
+        public int UserID { get; set; }
+
+        [Required]
+        public DateTime Modified { get; set; }
+
+
     }
 }

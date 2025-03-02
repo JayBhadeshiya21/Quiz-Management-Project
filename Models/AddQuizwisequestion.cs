@@ -2,18 +2,13 @@
 
 namespace Quiz1.Models
 {
-    public class AddQuizModel
+    public class AddQuizwisequestion
     {
+        [Required]
+        public int QuizId { get; set; }
 
         [Required]
-        public string QuizName { get; set; }
-
-       
-        [Required]
-        public int TotalQuestions { get; set; }
-
-        [Required]
-        public DateTime QuizDate { get; set; }
+        public int QuestionId { get; set; }
 
         [Required]
         public int UserId { get; set; }

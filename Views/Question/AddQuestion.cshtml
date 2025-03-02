@@ -1,8 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
 
 @model AddQuestionModel;
 
@@ -21,16 +17,11 @@
             </div>
 
             <!-- Question Level -->
-            <div class="mb-3">
-                <label for="questionLevel" class="form-label fw-bold">Question Level <span class="text-danger">*</span></label>
-                    <select class="form-select" id="questionLevel" asp-for="QuestionLevelID">
-                    <option selected disabled>Select Level</option>
-                    <option>Easy</option>
-                    <option>Moderate</option>
-                    <option>Hard</option>
-                </select>
-                    <span class="text-danger" asp-validation-for="QuestionLevelID"></span>
-            </div>
+                <div class="mt-3">
+                    <label class="form-label fw-bold">Question Level Id<span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" value="0" min="1" asp-for="QuestionLevelID ">
+                    <span class="text-danger" asp-validation-for="QuestionLevelID "></span>
+                </div>
 
             <!-- Answer Options -->
             <div class="row">
@@ -72,20 +63,42 @@
                     <span class="text-danger" asp-validation-for="CorrectOption"></span>
             </div>
 
-            <!-- Marks -->
-            <div class="mt-3">
-                <label class="form-label fw-bold">Marks <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control" value="0" min="1" asp-for="QuestionMarks">
+                <!-- Question Mark -->
+                <div class="mt-3">
+                    <label class="form-label fw-bold">Question Mark <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="QuestionMarks" asp-for="QuestionMarks">
                     <span class="text-danger" asp-validation-for="QuestionMarks"></span>
+                </div>
+
+             <!-- IsActive -->
+            <div class="mt-3">
+                    <label class="form-label fw-bold">IsActive <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="IsActive" asp-for="IsActive">
+                    <span class="text-danger" asp-validation-for="IsActive"></span>
             </div>
+
+                <!-- UserID  -->
+                <div class="mt-3">
+                    <label class="form-label fw-bold">UserID  <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="UserID" asp-for="UserID ">
+                    <span class="text-danger" asp-validation-for="UserID "></span>
+                </div>
+
+                <!--  Modified Questions -->
+                <div class="mb-3">
+                    <label for="quizDate" class="form-label fw-bold">Modified <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" id="Modified" asp-for="Modified">
+                    <span class="text-danger" asp-validation-for="Modified"></span>
+                </div>
+
 
             <!-- Buttons -->
             <div class="d-flex gap-2 mt-4">
-                <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success" asp-controller="Question" asp-action="QuestionInsert">Submit</button>
                 <button type="reset" class="btn btn-danger">Cancel</button>
             </div>
         </form>
     </div>
 </div>
 
-            </main>
+</main>

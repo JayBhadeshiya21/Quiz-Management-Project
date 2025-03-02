@@ -6,5 +6,11 @@ namespace Quiz1.Models
     {
         [Required]
         public string QuestionLevel { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
+
+        [Required]
+        public DateTime Modified { get; set; }
     }
 }
