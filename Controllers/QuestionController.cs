@@ -15,10 +15,11 @@ namespace Quiz1.Controllers
             configuration = _configuration;
         }
 
-        public IActionResult AddQuestion()
-        {
-            return View();
-        }
+        //public IActionResult AddQuestion()
+        //{
+        //    return View();
+        //}
+
         public IActionResult QuestionList()
         {
             string connectionString = this.configuration.GetConnectionString("ConnectionString");
@@ -60,6 +61,35 @@ namespace Quiz1.Controllers
             }
         }
 
+        //public IActionResult QuestionInsert(AddQuestionModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        string connectionString = this.configuration.GetConnectionString("ConnectionString");
+        //        SqlConnection connection = new SqlConnection(connectionString);
+        //        connection.Open();
+        //        SqlCommand command = connection.CreateCommand();
+        //        command.CommandType = CommandType.StoredProcedure;
+
+        //        command.CommandText = "PR_Question_Insert";
+        //        command.Parameters.Add("@QuestionText", SqlDbType.VarChar).Value = model.QuestionText;
+        //        command.Parameters.Add("@QuestionLevelID", SqlDbType.Int).Value = model.QuestionLevelID;
+        //        command.Parameters.Add("@OptionA", SqlDbType.VarChar).Value = model.OptionA;
+        //        command.Parameters.Add("@OptionB", SqlDbType.VarChar).Value = model.OptionB;
+        //        command.Parameters.Add("@OptionC", SqlDbType.VarChar).Value = model.OptionC;
+        //        command.Parameters.Add("@OptionD", SqlDbType.VarChar).Value = model.OptionD;
+        //        command.Parameters.Add("@CorrectOption", SqlDbType.VarChar).Value = model.CorrectOption;
+        //        command.Parameters.Add("@QuestionMarks", SqlDbType.Int).Value = model.QuestionMarks;
+        //        command.Parameters.Add("@IsActive", SqlDbType.Bit).Value = model.IsActive;
+        //        command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
+        //        command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
+        //        command.ExecuteNonQuery();
+        //        return RedirectToAction("QuestionList");
+        //    }
+
+        //    return View("AddQuestion", model);
+        //}
+
         public IActionResult QuestionInsert(AddQuestionModel model)
         {
             if (ModelState.IsValid)
@@ -70,7 +100,15 @@ namespace Quiz1.Controllers
                 SqlCommand command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.CommandText = "PR_Question_Insert";
+                if (model.QuestionId == 0)
+                {
+                    command.CommandText = "PR_Question_Insert";
+                }
+                else
+                {
+                    command.CommandText = "PR_Question_UpdateByPK";
+                    command.Parameters.Add("@QuestionID", SqlDbType.Int).Value = model.QuestionId;
+                }
                 command.Parameters.Add("@QuestionText", SqlDbType.VarChar).Value = model.QuestionText;
                 command.Parameters.Add("@QuestionLevelID", SqlDbType.Int).Value = model.QuestionLevelID;
                 command.Parameters.Add("@OptionA", SqlDbType.VarChar).Value = model.OptionA;
@@ -87,6 +125,50 @@ namespace Quiz1.Controllers
             }
 
             return View("AddQuestion", model);
+        }
+
+        public IActionResult Question_From_edit(int? QuestionId)
+        {
+            if (QuestionId == null)
+            {
+                return View(new AddQuizModel { Modified = DateTime.Now });
+            }
+
+            string connectionString = this.configuration.GetConnectionString("ConnectionString");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("PR_Question_SelectByPK", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@QuestionId", QuestionId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            var model = new AddQuestionModel
+                            {
+                                QuestionText = reader["QuestionText"].ToString(),
+                                QuestionLevelID = Convert.ToInt32(reader["QuestionLevelID"]),
+                                OptionA = reader["OptionA"].ToString(),
+                                OptionB = reader["OptionB"].ToString(),
+                                OptionC = reader["OptionC"].ToString(),
+                                OptionD = reader["OptionD"].ToString(),
+                                CorrectOption = reader["CorrectOption"].ToString(),
+                                QuestionMarks = Convert.ToInt32(reader["QuestionMarks"]),
+                                IsActive = Convert.ToInt32(reader["IsActive"]),
+                                UserID = Convert.ToInt32(reader["UserID"]),
+                                Modified = Convert.ToDateTime(reader["Modified"])
+                            };
+                            return View(model);
+                        }
+                    }
+                }
+            }
+            return View(new AddQuizModel()); // Return an empty model if no data found
         }
 
 

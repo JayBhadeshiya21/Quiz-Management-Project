@@ -49,7 +49,7 @@
         <!-- Quiz List Header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0">Quiz List</h5>
-            <a asp-controller="Quiz" asp-action="Add_Quiz" class="btn btn-primary">Add Quiz</a>
+            <a asp-controller="Quiz" asp-action="AddAndEdit" class="btn btn-primary">Add Quiz</a>
 
         </div>
 
@@ -72,7 +72,11 @@
                             <td>@datarow["UserName"]</td>
                             <td>@datarow["QuizDate"]</td>
                             <td>
-                                <button class="btn btn-sm btn-outline-success">✏ Edit</button>
+                                <button class="btn btn-sm btn-outline-success">
+                                    <a  asp-controller="Quiz" asp-action="Quiz_From_edit" asp-route-QuizID="@datarow["QuizID"]">
+                                        Edit
+                                     </a>
+                                </button>
                                 <button class="btn btn-sm btn-outline-danger" onclick="alertbox()">
                                     <a href="/Quiz/QuizDelete?QuizID=@datarow["QuizID"]">
                                         ❌ Delete
@@ -85,6 +89,13 @@
             </table>
         </div>
 
+        @* <select class="form-control" asp-for="QuizId"> *@
+        @*     <option value="">Select Country</option> *@
+        @*     @foreach (var quiz in ViewBag.CountryList) *@
+        @*     { *@
+        @*         <option value="@quiz.QuizID">@quiz.QuizName</option> *@
+        @*     } *@
+        @* </select> *@
 
         <!-- Pagination -->
         <div class="d-flex justify-content-between mt-3">

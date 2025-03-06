@@ -5,6 +5,8 @@ namespace Quiz1.Models
     public class AddQuestionModel
     {
         [Required]
+        public int QuestionId { get; set; }
+        [Required]
         public string QuestionText { get; set; }
 
         [Required]

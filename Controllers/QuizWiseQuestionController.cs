@@ -37,6 +37,7 @@ namespace Quiz1.Controllers
             return View();
         }
 
+
         public IActionResult QuizwisequestionInsert(AddQuizwisequestion model)
         {
             if (ModelState.IsValid)
@@ -59,5 +60,7 @@ namespace Quiz1.Controllers
 
             return View("AddQuizWiseQuestions", model);
         }
+
+
     }
 }

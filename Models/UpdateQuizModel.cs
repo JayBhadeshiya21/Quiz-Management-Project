@@ -6,9 +6,6 @@ namespace Quiz1.Models
     {
 
         [Required]
-        public int QuizId { get; set; }
-
-        [Required]
         public string NewQuizName { get; set; }
 
         [Required]

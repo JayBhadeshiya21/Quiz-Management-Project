@@ -52,7 +52,7 @@
     <!-- Question List Header -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h5 class="mb-0">Question List</h5>
-            <a asp-controller="Question" asp-action="AddQuestion" class="btn btn-primary">Add Question</a>
+            <a asp-controller="Question" asp-action="QuestionInsert" class="btn btn-primary">Add Question</a>
     </div>
 
     <!-- Question Table -->
@@ -90,7 +90,11 @@
                                 <td>@datarow["QuestionMarks"]</td>
                                 <td>@datarow["IsActive"]</td>
                                 <td>
-                                    <button class="btn btn-sm btn-outline-success">✏ Edit</button>
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <a asp-controller="Question" asp-action="Question_From_edit" asp-route-QuestionId="@datarow["QuestionId"]">
+                                            ✏ Edit
+                                         </a>
+                                    </button>
                                     <button class="btn btn-sm btn-outline-danger" onclick="alertbox()">
                                         <a href="/Question/QuestionDelete?QuestionID=@datarow["QuestionID"]">
                                             ❌ Delete
