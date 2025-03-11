@@ -2,5 +2,4 @@
 
 namespace Quiz1.Controllers
 {
-
 }
