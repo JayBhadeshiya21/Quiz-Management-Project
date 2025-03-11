@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "";
+}
+@model UserLoginModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Login - Quiz Management System</title>
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <center>
+        <main id="main" class="main mx-auto p-2">
+
+        <div class="card p-4 shadow" style="width: 350px;">
+            <div class="text-center">
+                <img src="~/quizlogo.png" alt="Quiz Logo" width="80">
+                <h4 class="mt-2">Quiz Management System</h4>
+            </div>
+
+            <form asp-action="UserLogin" asp-controller="User">
+                <div class="mb-3">
+                        <label for="username" class="align-items-start">Username :- </label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username" asp-for="Username">
+                        <span asp-validation-for="Username"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password :- </label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" asp-for="Password">
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <button type="submit" class="btn btn-primary w-100" asp-action="UserLogin" asp-controller="User" > Login</button>
+            </form>
+
+            <div class="text-center mt-3">
+                    <p class="mb-0">
+                        Create New ? 
+                        <a class="text-primary" asp-controller="Home" asp-action="Register">Account</a>
+                    </p>
+                <p class="mb-0">
+                    Don't have an account?
+                    <a class="text-primary" asp-controller="Home" asp-action="Index">Check Website</a>
+                </p>
+            </div>
+        </div>
+    </main>
+    </center>
+</body>
+</html>

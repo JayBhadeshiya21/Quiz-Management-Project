@@ -1,0 +1,138 @@
+﻿@model DataTable
+@using System.Data
+
+
+<main id="main" class="main">
+
+
+    <div class="container-fluid mt-4">
+    <h4 class="mb-3">Question List</h4>
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Question</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Question List</li>
+        </ol>
+    </nav>
+
+    <!-- Search Section -->
+    <div class="card p-4 mb-4">
+        <h5>Search</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label">Select Question Level</label>
+                <select class="form-select">
+                    <option>Select Level</option>
+                    <option>Easy</option>
+                    <option>Moderate</option>
+                    <option>Hard</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Question</label>
+                <input type="text" class="form-control" placeholder="Enter Question">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Min Marks</label>
+                <input type="number" class="form-control" placeholder="Enter Min Marks">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Max Marks</label>
+                <input type="number" class="form-control" placeholder="Enter Max Marks">
+            </div>
+        </div>
+        <div class="mt-3">
+            <button class="btn btn-success">Search</button>
+            <button class="btn btn-danger">Reset</button>
+        </div>
+    </div>
+
+    <!-- Question List Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Question List</h5>
+            <a asp-controller="Question" asp-action="QuestionInsert" class="btn btn-primary">Add Question</a>
+    </div>
+
+    <!-- Question Table -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Question Text</th>
+                        <th>QuestionLevelID</th>
+                        <th>User Name</th>
+                        <th>Option A</th>
+                        <th>Option B</th>
+                        <th>Option C</th>
+                        <th>Option D</th>
+                        <th>Answer</th>
+                        <th>Marks</th>
+                        <th>Active</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Rows.Count > 0)
+                    {
+                        @foreach (DataRow datarow in Model.Rows)
+                        {
+                            <tr>
+                                <td>@datarow["QuestionText"]</td>
+                                <td>@datarow["QuestionLevelID"]</td>
+                                <td>@datarow["UserName"]</td>
+                                <td>@datarow["OptionA"]</td>
+                                <td>@datarow["OptionB"]</td>
+                                <td>@datarow["OptionC"]</td>
+                                <td>@datarow["OptionD"]</td>
+                                <td>@datarow["CorrectOption"]</td>
+                                <td>@datarow["QuestionMarks"]</td>
+                                <td>@datarow["IsActive"]</td>
+                                <td>
+                                        <a asp-controller="Question" asp-action="Question_From_edit" asp-route-QuestionId="@datarow["QuestionId"]" class="btn btn-sm btn-outline-success">
+                                            ✏ Edit
+                                         </a>
+                                   
+                                        <a href="/Question/QuestionDelete?QuestionID=@datarow["QuestionID"]" class="btn btn-sm btn-outline-danger">
+                                            ❌ Delete
+                                        </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="10" class="text-center">No questions found.</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between mt-3">
+        <span>Showing 1 to 10 of 46 entries</span>
+        <nav>
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item disabled"><a class="page-link">Previous</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+</main>
+
+<script>
+    function alertbox() {
+      alert("Are you sure for delete data");
+    }
+</script>

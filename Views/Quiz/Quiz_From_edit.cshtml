@@ -1,0 +1,59 @@
+﻿@model AddQuizModel
+
+<main id="main" class="main">
+    <div class="container mt-5">
+        <h4 class="mb-3">Update Quiz</h4>
+
+        <div class="card p-4 shadow-sm">
+            <form asp-action="AddAndEdit" asp-controller="Quiz" method="post">
+                <input type="hidden" asp-for="QuizId" /> <!-- Hidden Quiz ID -->
+                <!-- Quiz Name -->
+                <div class="mb-3">
+                    <label for="quizName" class="form-label fw-bold">Quiz Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="quizName" asp-for="QuizName">
+                    <span class="text-danger" asp-validation-for="QuizName"></span>
+                </div>
+
+                <!-- Quiz Date -->
+                <div class="mb-3">
+                    <label for="quizDate" class="form-label fw-bold">Quiz Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" id="quizDate" asp-for="QuizDate" value="@Model.QuizDate.ToString("yyyy-MM-dd")">
+                    <span class="text-danger" asp-validation-for="QuizDate"></span>
+                </div>
+
+                <!-- User Id -->
+                <div class="mb-3">
+                    <label for="User Id" class="form-label fw-bold">User Id <span class="text-danger">*</span></label>
+                    <select class="form-control" asp-for="UserId">
+                        <option value="">Select UserID</option>
+                        @foreach (var user in ViewBag.Userlist)
+                        {
+                            <option value="@user.UserID">@user.UserName</option>
+                        }
+                    </select>
+                </div>
+
+
+                <!-- Modified Date -->
+                <div class="mb-3">
+                    <label for="modified" class="form-label fw-bold">Modified <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" id="modified" asp-for="Modified" value="@Model.Modified.ToString("yyyy-MM-dd")">
+                    <span class="text-danger" asp-validation-for="Modified"></span>
+                </div>
+
+                <!-- Total Questions -->
+                <div class="mb-3">
+                    <label for="totalQuestions" class="form-label fw-bold">Total Questions <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="totalQuestions" asp-for="TotalQuestions">
+                    <span class="text-danger" asp-validation-for="TotalQuestions"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,70 @@
+﻿@model DataTable
+@using System.Data
+
+
+<main id="main" class="main">
+
+
+    <div class="pagetitle">
+        <h1>Add Quiz</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Quiz</a></li>
+                <li class="breadcrumb-item">Add_Quiz</li>
+                @* <li class="breadcrumb-item active">Elements</li> *@
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0">Question Levels</h5>
+                    <div>
+                        <button class="btn btn-outline-danger me-2 mt-3" type="button">Delete Selected</button>
+                        <a asp-controller="QuestionLevel" asp-action="AddAndEdit" class="btn btn-outline-primary mt-3">Add Question Level</a>
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>QUESTION LEVEL</th>
+                            <th>User Name</th>
+                            <th>Created</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (DataRow datarow in Model.Rows)
+                        {
+                            <tr>
+                                <td><input type="checkbox" name="selectedItems" value="@datarow["QuestionLevel"]"></td>
+                                <td>@datarow["QuestionLevel"]</td>
+                                <td>@datarow["UserName"]</td>
+                                <td>@datarow["Created"]</td>
+                                <td>
+                                    <a asp-controller="QuestionLevel" asp-action="QuestionLevel_From_edit" asp-route-QuestionLevelID="@datarow["QuestionLevelID"]" class="btn btn-sm btn-outline-success">
+                                        ✏ Edit
+                                     </a>
+                                    <a href="/QuestionLevel/QuestionLevelsDelete?QuestionLevelID=@(datarow["QuestionLevelID"])" class="btn btn-sm btn-outline-danger" onclick="alertbox();">
+                                        ❌ Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
+</main>
+<script>
+    function alertbox() {
+      alert("Are you sure for delete data");
+    }
+</script>
