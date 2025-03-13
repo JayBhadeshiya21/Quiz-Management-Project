@@ -16,30 +16,30 @@ namespace Quiz1.Controllers
             configuration = _configuration;
         }
 
-        public IActionResult Add_Quiz(AddQuizModel model)
-        {
-            UserDropDown();
-            if (ModelState.IsValid)
-            {
-                string connectionString = this.configuration.GetConnectionString("ConnectionString");
-                SqlConnection connection = new SqlConnection(connectionString);
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
+        //public IActionResult Add_Quiz(AddQuizModel model)
+        //{
+        //    UserDropDown();
+        //    if (ModelState.IsValid)
+        //    {
+        //        string connectionString = this.configuration.GetConnectionString("ConnectionString");
+        //        SqlConnection connection = new SqlConnection(connectionString);
+        //        connection.Open();
+        //        SqlCommand command = connection.CreateCommand();
+        //        command.CommandType = CommandType.StoredProcedure;
 
-                command.CommandText = "PR_Quiz_Insert";
-                UserDropDown();
-                command.Parameters.Add("@QuizName", SqlDbType.VarChar).Value = model.QuizName;
-                command.Parameters.Add("@QuizDate", SqlDbType.DateTime).Value = model.QuizDate;
-                command.Parameters.Add("@UserId", SqlDbType.Int).Value = model.UserId;
-                command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
-                command.Parameters.Add("@TotalQuestions", SqlDbType.Int).Value = model.TotalQuestions;
-                command.ExecuteNonQuery();
-                return RedirectToAction("Quiz_List");
-            }
+        //        command.CommandText = "PR_Quiz_Insert";
+        //        UserDropDown();
+        //        command.Parameters.Add("@QuizName", SqlDbType.VarChar).Value = model.QuizName;
+        //        command.Parameters.Add("@QuizDate", SqlDbType.DateTime).Value = model.QuizDate;
+        //        command.Parameters.Add("@UserId", SqlDbType.Int).Value = model.UserId;
+        //        command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
+        //        command.Parameters.Add("@TotalQuestions", SqlDbType.Int).Value = model.TotalQuestions;
+        //        command.ExecuteNonQuery();
+        //        return RedirectToAction("Quiz_List");
+        //    }
 
-            return View("Add_Quiz", model);
-        }
+        //    return View("Add_Quiz", model);
+        //}
 
         public IActionResult Quiz_List()
         {
@@ -101,6 +101,7 @@ namespace Quiz1.Controllers
                 {
                     command.CommandText = "PR_Quiz_UpdateByPK";
                     command.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizId;
+                    //command.Parameters.Add("@UserID", SqlDbType.Int).Value = CommonVariable.UserID();
                 }
                 UserDropDown();
                 command.Parameters.Add("@QuizName", SqlDbType.VarChar).Value = model.QuizName;

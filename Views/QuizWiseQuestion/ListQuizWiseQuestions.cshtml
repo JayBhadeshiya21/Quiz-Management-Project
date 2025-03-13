@@ -75,12 +75,10 @@
                                 <td>@datarow["QuizName"]</td>
                                 <td>@datarow["QuestionText"]</td>
                                 <td>@datarow["UserName"]</td>
-
                                 <td>
-                                    <a asp-controller="QuizWiseQuestions" asp-action="ListQuizWiseQuestions" class="btn btn-sm btn-outline-info">
+                                    <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionsDetails" class="btn btn-sm btn-outline-info">
                                         ℹ Details
                                     </a>
-                                   
                                         <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestions_From_edit" asp-route-QuizWiseQuestionsID="@datarow["QuizWiseQuestionsID"]" class="btn btn-sm btn-outline-success">
                                             ✏ Edit
                                          </a>
@@ -93,8 +91,6 @@
                             </tr>
                         }
                     }
-
-
                 </tbody>
             </table>
         </div>
