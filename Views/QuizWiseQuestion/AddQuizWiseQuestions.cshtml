@@ -13,9 +13,9 @@
             <form>
                 @* <input type="hidden" asp-for="@Model.QuizwisequestionId"></input> *@
                 <div class="mb-3">
-                    <label for="questionLevel" class="form-label fw-bold">Quiz Id<span class="text-danger">*</span></label>
+                    <label for="questionLevel" class="form-label fw-bold">Quiz <span class="text-danger">*</span></label>
                     <select class="form-control" asp-for="QuizId">
-                        <option value="">Select QuizId</option>
+                        <option value="">Select Quiz</option>
                         @foreach (var quiz in ViewBag.Quizlist)
                         {
                             <option value="@quiz.QuizId">@quiz.QuizName</option>
@@ -26,9 +26,9 @@
 
                 @*  Question id *@
                 <div class="mb-3">
-                    <label for="Userid" class="form-label fw-bold">Question Id <span class="text-danger">*</span></label>
+                    <label for="Userid" class="form-label fw-bold">Question <span class="text-danger">*</span></label>
                     <select class="form-control" asp-for="QuestionId">
-                        <option value="">Select QuestionId</option>
+                        <option value="">Select Question</option>
                         @foreach (var question in ViewBag.Questionlist)
                         {
                             <option value="@question.QuestionId">@question.QuestionName</option>
@@ -37,18 +37,6 @@
                     <span class="text-danger" asp-validation-for="QuestionId"></span>
                 </div>
 
-                @*  User id *@
-                <div class="mb-3">
-                    <label for="Userid" class="form-label fw-bold">User Id <span class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="UserId">
-                        <option value="">Select UserID</option>
-                        @foreach (var user in ViewBag.Userlist)
-                        {
-                            <option value="@user.UserID">@user.UserName</option>
-                        }
-                    </select>
-                    <span class="text-danger" asp-validation-for="UserId"></span>
-                </div>
 
                 <!--  Modified Questions -->
                 <div class="mb-3">

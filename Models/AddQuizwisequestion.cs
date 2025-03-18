@@ -5,7 +5,7 @@ namespace Quiz1.Models
     public class AddQuizwisequestion
     {
         [Required]
-        public int QuizwisequestionId {  get; set; }
+        public int QuizWiseQuestionsID {  get; set; }
 
         [Required]
         public int QuizId { get; set; }

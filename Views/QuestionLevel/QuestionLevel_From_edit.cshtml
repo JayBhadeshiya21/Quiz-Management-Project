@@ -14,18 +14,6 @@
                     <span class="text-danger" asp-validation-for="QuestionLevel"></span>
                 </div>
 
-                @* user id *@   
-                <div class="mb-3">
-                    <label for="Userid" class="form-label fw-bold">User Id <span class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="UserId">
-                        <option value="">Select UserID</option>
-                        @foreach (var user in ViewBag.Userlist)
-                        {
-                            <option value="@user.UserID">@user.UserName</option>
-                        }
-                    </select>
-                    <span class="text-danger" asp-validation-for="UserId"></span>
-                </div>
 
                 <!--  Modified Questions -->
                 <div class="mb-3">

@@ -17,9 +17,9 @@
 
                 <!-- Question Level -->
                 <div class="mt-3">
-                    <label class="form-label fw-bold">Question Level Id<span class="text-danger">*</span></label>
+                    <label class="form-label fw-bold">Question Level<span class="text-danger">*</span></label>
                     <select class="form-control" asp-for="QuestionLevelID">
-                        <option value="">Select QuestionLevelID</option>
+                        <option value="">Select QuestionLevel</option>
                         @foreach (var level in ViewBag.Levellist)
                         {
                             <option value="@level.QuestionLevelId">@level.QuestionLevelName</option>
@@ -82,18 +82,7 @@
                     <span class="text-danger" asp-validation-for="IsActive"></span>
                 </div>
 
-                <!-- UserID  -->
-                <div class="mt-3">
-                    <label class="form-label fw-bold">UserID  <span class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="UserID">
-                        <option value="">Select UserId</option>
-                        @foreach (var user in ViewBag.userlist)
-                        {
-                            <option value="@user.UserID">@user.UserName</option>
-                        }
-                    </select>
-                    <span class="text-danger" asp-validation-for="UserID "></span>
-                </div>
+              
 
                 <!--  Modified Questions -->
                 <div class="mb-3">

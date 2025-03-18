@@ -21,19 +21,6 @@
                     <span class="text-danger" asp-validation-for="QuizDate"></span>
                 </div>
 
-                <!-- User Id -->
-                <div class="mb-3">
-                    <label for="User Id" class="form-label fw-bold">User Id <span class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="UserId">
-                        <option value="">Select UserID</option>
-                        @foreach (var user in ViewBag.Userlist)
-                        {
-                            <option value="@user.UserID">@user.UserName</option>
-                        }
-                    </select>
-                </div>
-
-
                 <!-- Modified Date -->
                 <div class="mb-3">
                     <label for="modified" class="form-label fw-bold">Modified <span class="text-danger">*</span></label>

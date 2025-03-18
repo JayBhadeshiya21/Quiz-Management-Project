@@ -101,14 +101,13 @@ namespace Quiz1.Controllers
                 {
                     command.CommandText = "PR_Quiz_UpdateByPK";
                     command.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizId;
-                    //command.Parameters.Add("@UserID", SqlDbType.Int).Value = CommonVariable.UserID();
                 }
                 UserDropDown();
                 command.Parameters.Add("@QuizName", SqlDbType.VarChar).Value = model.QuizName;
                 command.Parameters.Add("@TotalQuestions", SqlDbType.Int).Value = model.TotalQuestions;
                 command.Parameters.Add("@QuizDate", SqlDbType.DateTime).Value = model.QuizDate;
                 command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
-                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserId;
+                command.Parameters.Add("@UserID", SqlDbType.Int).Value = CommonVariable.UserID();
                 command.ExecuteNonQuery();
                 return RedirectToAction("Quiz_List");
             }

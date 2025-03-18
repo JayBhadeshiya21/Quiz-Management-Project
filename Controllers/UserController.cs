@@ -73,8 +73,5 @@ namespace Quiz1.Controllers
             return RedirectToAction("Login", "User");
         }
 
-        
     }
-
-    
 }

@@ -40,28 +40,28 @@ namespace Quiz1.Controllers
             return View();
         }
 
-        public IActionResult QuizwisequestionInsert(AddQuizwisequestion model)
-        {
-            if (ModelState.IsValid)
-            {
-                string connectionString = this.configuration.GetConnectionString("ConnectionString");
-                SqlConnection connection = new SqlConnection(connectionString);
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                command.CommandType = CommandType.StoredProcedure;
+        //public IActionResult QuizwisequestionInsert(AddQuizwisequestion model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        string connectionString = this.configuration.GetConnectionString("ConnectionString");
+        //        SqlConnection connection = new SqlConnection(connectionString);
+        //        connection.Open();
+        //        SqlCommand command = connection.CreateCommand();
+        //        command.CommandType = CommandType.StoredProcedure;
 
 
-                command.CommandText = "PR_QuizWiseQuestions_Insert";
-                command.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizId;
-                command.Parameters.Add("@QuestionID", SqlDbType.Int).Value = model.QuestionId;
-                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserId;
-                command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
-                command.ExecuteNonQuery();
-                return RedirectToAction("ListQuizWiseQuestions");
-            }
+        //        command.CommandText = "PR_QuizWiseQuestions_Insert";
+        //        command.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizId;
+        //        command.Parameters.Add("@QuestionID", SqlDbType.Int).Value = model.QuestionId;
+        //        command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserId;
+        //        command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
+        //        command.ExecuteNonQuery();
+        //        return RedirectToAction("ListQuizWiseQuestions");
+        //    }
 
-            return View("AddQuizWiseQuestions", model);
-        }
+        //    return View("AddQuizWiseQuestions", model);
+        //}
 
         public IActionResult AddAndEdit(AddQuizwisequestion model)
         {
@@ -76,18 +76,18 @@ namespace Quiz1.Controllers
                 SqlCommand command = connection.CreateCommand();
                 command.CommandType = CommandType.StoredProcedure;
 
-                if (model.QuizwisequestionId == 0)
+                if (model.QuizWiseQuestionsID == 0)
                 {
                     command.CommandText = "PR_QuizWiseQuestions_Insert";
                 }
                 else
                 {
                     command.CommandText = "PR_QuizWiseQuestions_UpdateByPK";
-                    command.Parameters.Add("@QuizWiseQuestionsID", SqlDbType.Int).Value = model.QuizwisequestionId;
+                    command.Parameters.Add("@QuizWiseQuestionsID", SqlDbType.Int).Value = model.QuizWiseQuestionsID;
                 }
                 command.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizId;
                 command.Parameters.Add("@QuestionID", SqlDbType.Int).Value = model.QuestionId;
-                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserId;
+                command.Parameters.Add("@UserID", SqlDbType.Int).Value = CommonVariable.UserID();
                 command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
                 command.ExecuteNonQuery();
                 return RedirectToAction("ListQuizWiseQuestions");
@@ -132,6 +132,33 @@ namespace Quiz1.Controllers
                 }
             }
             return View(new AddQuizwisequestion()); // Return an empty model if no data found
+        }
+
+        public IActionResult QuizWiseQuestionsDelete(int? QuizWiseQuestionsID)
+        {
+            try
+            {
+                string connectionString = configuration.GetConnectionString("ConnectionString");
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "PR_QuizWiseQuestions_DeleteByPK";
+                    command.Parameters.Add("@QuizWiseQuestionsID", SqlDbType.Int).Value = QuizWiseQuestionsID;
+
+
+                    command.ExecuteNonQuery();
+                }
+
+                TempData["SuccessMessage"] = "QuestionLevel deleted successfully.";
+                return RedirectToAction("ListQuizWiseQuestions");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while deleting the QuestionLevel: " + ex.Message;
+                return RedirectToAction("ListQuizWiseQuestions");
+            }
         }
 
         public void UserDropDown()

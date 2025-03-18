@@ -121,7 +121,7 @@ namespace Quiz1.Controllers
                 command.Parameters.Add("@CorrectOption", SqlDbType.VarChar).Value = model.CorrectOption;
                 command.Parameters.Add("@QuestionMarks", SqlDbType.Int).Value = model.QuestionMarks;
                 command.Parameters.Add("@IsActive", SqlDbType.Bit).Value = model.IsActive;
-                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
+                command.Parameters.Add("@UserID", SqlDbType.Int).Value = CommonVariable.UserID();
                 command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
                 command.ExecuteNonQuery();
                 return RedirectToAction("QuestionList");

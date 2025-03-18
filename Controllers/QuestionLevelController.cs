@@ -105,7 +105,7 @@ namespace Quiz1.Controllers
                     command.Parameters.Add("@QuestionLevelID", SqlDbType.Int).Value = model.QuestionLevelID;
                 }
                 command.Parameters.Add("@QuestionLevel", SqlDbType.VarChar).Value = model.QuestionLevel;
-                command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserId;
+                command.Parameters.Add("@UserID", SqlDbType.Int).Value = CommonVariable.UserID();
                 command.Parameters.Add("@Modified", SqlDbType.DateTime).Value = model.Modified;
                 command.ExecuteNonQuery();
                 return RedirectToAction("ListQuestionLevel");

@@ -82,10 +82,9 @@
                                         <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestions_From_edit" asp-route-QuizWiseQuestionsID="@datarow["QuizWiseQuestionsID"]" class="btn btn-sm btn-outline-success">
                                             ✏ Edit
                                          </a>
-                                   
-                                        <a href="/QuizWiseQuestions/QuestionLevelsDelete?QuizWiseQuestionsID=@datarow["QuizWiseQuestionsID"]" class="btn btn-sm btn-outline-danger">
+                                    <a asp-controller="QuizWiseQuestion" asp-action="QuizWiseQuestionsDelete" asp-route-QuizWiseQuestionsID="@datarow["QuizWiseQuestionsID"]" class="btn btn-sm btn-outline-danger">
                                             ❌ Delete
-                                        </a>
+                                     </a>
                                    
                                 </td>
                             </tr>

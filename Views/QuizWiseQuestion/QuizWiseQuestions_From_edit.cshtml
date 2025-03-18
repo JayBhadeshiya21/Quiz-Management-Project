@@ -10,10 +10,12 @@
     <div class="container mt-5">
         <h4 class="mb-3">Update QuizWiseQuestion </h4>
         <div class="card p-4 shadow-sm">
-            <form>
-                @* <input type="hidden" asp-for="@Model.QuizwisequestionId"></input> *@
+            <form asp-controller="QuizWiseQuestion" asp-action="AddAndEdit" method="post">
+
+                <input type="hidden" asp-for="@Model.QuizWiseQuestionsID" />
+
                 <div class="mb-3">
-                    <label for="questionLevel" class="form-label fw-bold">Quiz Id<span class="text-danger">*</span></label>
+                    <label for="questionLevel" class="form-label fw-bold">Quiz <span class="text-danger">*</span></label>
                     <select class="form-control" asp-for="QuizId">
                         <option value="">Select QuizId</option>
                         @foreach (var quiz in ViewBag.Quizlist)
@@ -26,9 +28,9 @@
 
                 @*  Question id *@
                 <div class="mb-3">
-                    <label for="Userid" class="form-label fw-bold">Question Id <span class="text-danger">*</span></label>
+                    <label for="Userid" class="form-label fw-bold">Question  <span class="text-danger">*</span></label>
                     <select class="form-control" asp-for="QuestionId">
-                        <option value="">Select QuestionId</option>
+                        <option value="">Select Question</option>
                         @foreach (var question in ViewBag.Questionlist)
                         {
                             <option value="@question.QuestionId">@question.QuestionName</option>
@@ -36,18 +38,7 @@
                     </select>
                     <span class="text-danger" asp-validation-for="QuestionId"></span>
                 </div>
-                @*  User id *@
-                <div class="mb-3">
-                    <label for="Userid" class="form-label fw-bold">User Id <span class="text-danger">*</span></label>
-                    <select class="form-control" asp-for="UserId">
-                        <option value="">Select UserID</option>
-                        @foreach (var user in ViewBag.Userlist)
-                        {
-                            <option value="@user.UserID">@user.UserName</option>
-                        }
-                    </select>
-                    <span class="text-danger" asp-validation-for="UserId"></span>
-                </div>
+                
 
                 <!--  Modified Questions -->
                 <div class="mb-3">
@@ -56,10 +47,8 @@
                     <span class="text-danger" asp-validation-for="Modified"></span>
                 </div>
 
-
-
                 <div class="d-flex gap-2">
-                    <button type="submit" class="btn btn-success" asp-controller="QuizWiseQuestion" asp-action="AddAndEdit">Save</button>
+                    <button type="submit" class="btn btn-success">Save</button>
                     <button type="reset" class="btn btn-danger">Cancel</button>
                 </div>
             </form>
